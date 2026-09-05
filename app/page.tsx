@@ -18,7 +18,7 @@ type Product = {
   name: string;
   unit: string;
   current_stock: number;
-  minimum_stock: number;
+  min_stock: number;
 };
 
 type Purchase = {
@@ -70,7 +70,7 @@ export default function Dashboard() {
 
         supabase
           .from("products")
-          .select("id, name, unit, current_stock, minimum_stock")
+          .select("id, name, unit, current_stock, min_stock")
           .order("name", { ascending: true }),
 
         supabase
@@ -140,7 +140,7 @@ export default function Dashboard() {
 
   const lowStockProducts = products.filter(
     (product) =>
-      Number(product.current_stock || 0) <= Number(product.minimum_stock || 0)
+      Number(product.current_stock || 0) <= Number(product.min_stock || 0)
   );
 
   const recentSales = sales.slice(0, 6);
@@ -463,7 +463,7 @@ export default function Dashboard() {
                       <div>
                         <p className="font-medium">{product.name}</p>
                         <p className="text-xs text-slate-500">
-                          Minimum: {product.minimum_stock} {product.unit}
+                          Minimum: {product.min_stock} {product.unit}
                         </p>
                       </div>
 
